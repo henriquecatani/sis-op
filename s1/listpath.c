@@ -1,4 +1,4 @@
-// Henrique Bottan Catani e Mateus Roque Weiler
+// henriquecatani e Mateus_RW
 
 // arguments: [progname] <path>
 // lists the directory contents
