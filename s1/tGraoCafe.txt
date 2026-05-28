@@ -1,0 +1,42 @@
+GRAO CAFE
+A Computational Analytics & Future Engineering (CAFE) é a
+principal provedora de infraestrutura para validação de transações da
+FintechGlobal Risk & Asset Optimization (GRAO). Sua missão é
+criar um simulador do fluxo de microtransações globais.
+Dentro dodatacenter, opera o Nó Expresso, umcluster especializado em
+validar Smart-Ledger Tokens. Para otimizar custos operacionais e reduzir a pegada
+de carbono, a CAFE implementou uma política rígida de gerenciamento de energia.
+O sistema deve conter dois tipos de threads, implementados com a biblioteca pthreads:
+• Provadores: um número fixo de unidades de processamento. Os Provadores são numerados
+de um (1) a quantidade de provadores do sistema (P). Quando não há tokens para validar
+(provar), elas entram imediatamente em estado de Hibernação para economizar eletricidade;
+• Mestre da Torra: é quem decide quando um novo lote de grãos (tokens) está pronto para ser
+enviado. Único no sistema.
+O sistema contém ainda um Hooper que armazena grãos de café logo antes da moagem. No
+caso da CAFE, os tokens que chegam para serem processados.
+Funcionamento
+O Mestre da Torra gera os novos lotes de grãos (tokens) de forma assíncrona e constante. Há
+um intervalo de tempo entre a geração de um lote de grãos e outro. Esse intervalo deve ser gerado
+de forma aleatória. Cada lote de grãos deve ser considerado umtoken. Os lotes de grãos são
+numerados de um (1) até a quantidade de tokens gerada (T).
+Quando um lote de grãos chega e encontra um Provador em estado de Hibernação, ele o
+“aciona” para processamento. Ao processar um lote de grãos, deve-se gerar um número aleatório
+entre 10 e 50 e simular o processamento com uma chamada usleep do valor aleatório gerado. Se
+todos os Provadores estão trabalhando, o token ocupa um slot no Hooper (se existir).
+Se um token chega, todos os Provadores estão ocupados e o Hooper está 100% cheio, ocorre
+um Descarte. Na economia digital, um descarte significa uma transação perdida, o que gera prejuízo
+direto para a CAFE (várias centenas de US$). Mostrar ao final a quantidade de descartes ocorridos.
+Dados de entrada (via linha de comando):
+• Quantidade de provadores P | 0 < P < 5;
+• Tamanho do Hooper H | 0 < H < 10;
+• Quantidade de lotes de grãos a processar T | 1 < T < 100; 
+• Intervalo mínimo para geração de tokens Min | 5 < Min < 10;
+• Intervalo máximo para geração de tokens Max | Min < Max < 50;
+Deve-se criar um log de execução, com os Provadores e Tokens identificados, contendo:
+• mostrar a inicialização e finalização de cada Provador;
+• chegada de cada lote de grão, juntamente com:
+◦ mostrar a informação se há Provador disponível ou não;
+◦ mostrar a situação do Hooper, se há ou não slot vazio;
+◦ mostrar se o Token foi descartado;
+• mostrar o processamento de cada lote de grão;
+• mostrar a finalização, contendo a quantidade de Tokens processados e descartados.
