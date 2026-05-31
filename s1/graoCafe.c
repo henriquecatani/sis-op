@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <pthread.h>
 #include <stdlib.h>
+#include <time.h>
 #include <unistd.h>
 #include <semaphore.h>
 
@@ -101,10 +102,10 @@ int main (void)
 	sem_init(&mutex_sem, 0, 1); // comeca desbloqueado
 	sem_init(&sem_vagas, 0, H); // comeca com H vagas disponiveis no hooper
 
+	pthread_t t_provadores[P];
 	for (int i = 0; i < P; i++)
 	{
-		pthread_t t_provador;
-		pthread_create(&t_provador, NULL, provador, (void *) i);
+		pthread_create(&t_provadores[i], NULL, provador, (void *) i);
 	}
 
 	pthread_t t_mestre;
@@ -115,13 +116,25 @@ int main (void)
 	// fim
 	fim = 1;
 
-	// TODO: sem_post(&sem_tokens) para todos provadores
+	// acorda todos os provadores bloqueados para que possam encerrar
+	for (int i = 0; i < P; i++)
+	{
+		sem_post(&sem_tokens);
+	}
 
-	// TODO: join das threads dos provadores
+	// aguarda todos os provadores terminarem
+	for (int i = 0; i < P; i++)
+	{
+		pthread_join(t_provadores[i], NULL);
+	}
 
-	// TODO: relatorio final e outros 
+	// relatorio final
+	printf("\nRelatorio final:\n");
+	printf("Tokens processados: %d\n", tokens_processados);
+	printf("Tokens descartados: %d\n", tokens_descartados);
+	printf("Hooper (ocupados): %d\n", hooper);
 
-	sem_destroy(&mutex_sem);
+	sem_destroy(&mutex_sem);	
 	sem_destroy(&sem_tokens);
 	sem_destroy(&sem_vagas);
 
