@@ -2,6 +2,9 @@
 // Othavio Frison Pedretti 207705
 // graoCafe.c
 
+// gcc -o graoCafe graoCafe.c -pthread
+// exemplo uso: ./graoCafe 4 8 15 6 30
+
 #include <stdio.h>
 #include <pthread.h>
 #include <stdlib.h>
