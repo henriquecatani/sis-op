@@ -91,10 +91,25 @@ static void *provador(void *param)
 	sem_post(&mutex_sem);
 }
 
-int main (void) 
+int main (int argc, char *argv[]) 
 {
-	// todo: verificar args de input
+	// verificar args de input
 	// args: T, H, P, min, max
+	if (argc != 6) {
+		fprintf(stderr, "Uso: %s <T> <H> <P> <min> <max>\n", argv[0]);
+		return 1;
+	}
+
+	T = atoi(argv[1]);
+	H = atoi(argv[2]);
+	P = atoi(argv[3]);
+	min = atoi(argv[4]);
+	max = atoi(argv[5]);
+
+	if (T <= 0 || H <= 0 || P <= 0 || min < 0 || max < 0 || min > max) {
+		fprintf(stderr, "Erro: argumentos invalidos\n");
+		return 1;
+	}
 
 	srand(time(NULL)); // para depois gerar numeros aleatorios
 
